@@ -7,7 +7,7 @@ set %network1 xeroxIRC
 set %network2 Rizon
 set %network3 Freenode
 set %network4 MindForge
-set %relaychannel #WBNC
+set %relaychannel #DreamBNC
 echo -a Config has been loaded! To run the bot, connect to the IRC networks listed in the config.
 }
 ;-----------END CONFIG-----------
