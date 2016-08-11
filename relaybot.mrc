@@ -1,61 +1,9 @@
-;WBNC Relay Bot v1.0
-;Credit to nick1 for the original code
-;-----------CONFIG---------------
-alias config.load {
-  echo -a Loading config...
-  set %network1 xeroxIRC
-  set %network2 Rizon
-  set %network3 Freenode
-  set %network4 MindForge
-  set %relaychannel #DreamBNC
-  echo -a Config has been loaded! To run the bot, connect to the IRC networks listed in the config.
-}
-;-----------END CONFIG-----------
-on *:text:!relay mindforge*:#DreamBNC-Relay:{
-  if ($network == Rizon) {
-    scid $net(MindForge) msg %relaychannel [RELAY] (From $nick $+ ) $3-
-  }
-}
-alias net {
-  var %netcount $scon(0)
-  while %netcount {
-    if ($scon(%netcount).network == $1) { var %netid %netcount }
-    dec %netcount
-  }
-  scon %netid return $!cid
-}
+# Made by W24 for DreamBNC
+# Credit to nick1 for the original code
 
-on *:text:!relay xeroxirc*:#DreamBNC-Relay:{
+on *:text:!relay *:#DreamBNC-Relay:{
   if ($network == Rizon) {
-    scid $net(xeroxIRC) msg %relaychannel [RELAY] (From $nick $+ ) $3-
-  }
-}
-alias net {
-  var %netcount $scon(0)
-  while %netcount {
-    if ($scon(%netcount).network == $1) { var %netid %netcount }
-    dec %netcount
-  }
-  scon %netid return $!cid
-}
-
-on *:text:!relay freenode*:#DreamBNC-Relay:{
-  if ($network == Rizon) {
-    scid $net(Freenode) msg %relaychannel [RELAY] (From $nick $+ ) $3-
-  }
-}
-alias net {
-  var %netcount $scon(0)
-  while %netcount {
-    if ($scon(%netcount).network == $1) { var %netid %netcount }
-    dec %netcount
-  }
-  scon %netid return $!cid
-}
-
-on *:text:!relay rizon*:#DreamBNC-Relay:{
-  if ($network == Rizon) {
-    scid $net(Rizon) msg %relaychannel [RELAY] (From $nick $+ ) $3-
+    scid $net( $+ $2 $+ ) msg %relaychannel [RELAY] (From $nick $+ ) $3-
   }
 }
 alias net {
@@ -68,16 +16,19 @@ alias net {
 }
 
 on *:text:*:#DreamBNC:{
-  if ($network == %network1 $+ ) {
+  if ($network == Freenode) {
     scid $net(Rizon) msg #DreamBNC-Relay $+([,$network,]) < $+ $nick $+ > $1-
   }
-  elseif ($network == %network2 $+ ) {
+  elseif ($network == Rizon) {
     scid $net(Rizon) msg #DreamBNC-Relay $+([,$network,]) < $+ $nick $+ > $1-
   }
-  elseif ($network == %network3 $+ ) {
+  elseif ($network == EsperNet) {
     scid $net(Rizon) msg #DreamBNC-Relay $+([,$network,]) < $+ $nick $+ > $1-
   }
-  elseif ($network == %network4 $+ ) {
+  elseif ($network == xeroxIRC) {
+    scid $net(Rizon) msg #DreamBNC-Relay $+([,$network,]) < $+ $nick $+ > $1-
+  }
+  elseif ($network == MindForge) {
     scid $net(Rizon) msg #DreamBNC-Relay $+([,$network,]) < $+ $nick $+ > $1-
   }
 }
